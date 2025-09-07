@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "name": "training-management-frontend",
+  "builds": [
+    {
+      "src": "src/client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "public,max-age=31536000,immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://training-management-backend-c9qq.onrender.com/api",
+    "GENERATE_SOURCEMAP": "false"
+  },
+  "buildCommand": "cd src/client && npm ci && npm run build",
+  "outputDirectory": "src/client/build",
+  "installCommand": "cd src/client && npm ci"
+}

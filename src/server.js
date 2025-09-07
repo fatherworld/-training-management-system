@@ -13,11 +13,16 @@ const JWT_SECRET = 'training_management_secret_key_2024';
 
 // 中间件
 app.use(cors({
-  origin: process.env.CLIENT_URL || ['http://localhost:3000', 'https://*.netlify.app'],
+  origin: [
+    'http://localhost:3000',
+    'https://training-management-backend-c9qq.onrender.com',
+    /https:\/\/.*\.netlify\.app$/
+  ],
   credentials: true
 }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'client/build')));
+
+// 生产环境不提供静态文件服务，由Netlify托管前端
 
 // 数据库初始化
 const db = new sqlite3.Database('./training_management.db');
@@ -230,23 +235,16 @@ cron.schedule('0 8 * * *', () => {
   });
 });
 
-// 服务静态文件 (仅在生产环境)
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-} else {
-  // 开发环境下的根路由
-  app.get('/', (req, res) => {
+// API服务器根路由
+app.get('/', (req, res) => {
     res.json({ 
       message: '培训管理系统API服务器运行中', 
       version: '1.0.0',
       environment: 'development',
-      frontend: 'http://localhost:3000',
-      api_docs: 'http://localhost:5000/api'
+      frontend: 'Deployed on Netlify',
+      api_docs: '/api'
     });
-  });
-}
+});
 
 app.listen(PORT, () => {
   console.log(`培训管理系统服务器运行在端口 ${PORT}`);

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: training-management-backend
+    env: node
+    buildCommand: npm install && cd src && npm install
+    startCommand: cd src && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: training_management_secret_key_2024
+      - key: PORT
+        generateValue: true

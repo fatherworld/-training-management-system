@@ -1,0 +1,41 @@
+{
+  "name": "training-management-system",
+  "version": "1.0.0",
+  "description": "培训管理软件 - 支持招生、试听、排课、消课、通知、点评、数据分析",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "install-all": "node install.js",
+    "start-all": "node start.js --all",
+    "start-client": "node start.js --client",
+    "setup": "npm run install-all && echo '\n🎉 安装完成！使用 npm run start-all 启动系统'"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.4",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "training",
+    "management",
+    "education",
+    "scheduling"
+  ],
+  "author": "Training Management System",
+  "license": "MIT"
+}

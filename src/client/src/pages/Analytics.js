@@ -15,7 +15,7 @@ const Analytics = () => {
 
   useEffect(() => {
     fetchAnalytics();
-  }, [period]);
+  }, [period]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchAnalytics = async () => {
     try {
